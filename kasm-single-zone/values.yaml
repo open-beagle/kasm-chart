@@ -27,6 +27,9 @@ global:
     ##      
     pullCredentials: {}
 
+  ## @param global.ingressClassName Global ingress class name to use when generating ingress resource
+  ##
+  ingressClassName: "" 
   ## @param global.hostname Global hostname to use for TLS Certificates and ingress URL
   ##
   hostname: ""
