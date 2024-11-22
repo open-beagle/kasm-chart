@@ -22,3 +22,4 @@ CHANGELOG.md
 .project
 .idea/
 *.tmproj
+*.tgz

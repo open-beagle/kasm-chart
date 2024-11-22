@@ -1,0 +1,54 @@
+global:
+  namespace: "beagle-kasm"
+  kasmPasswords:
+    adminPassword: "beagle!@#123"
+    userPassword: "beagle!@#123"
+
+kasmApp:  
+  servicesToDeploy:
+    kasmProxy:
+      name: kasm-proxy
+      image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
+      tag: proxy-1.16.1
+    db:
+      name: kasm-db
+      image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
+      tag: postgres-1.16.1
+      storageClassName: "hostpath"
+    kasmApi:
+      name: kasm-api
+      addHealthChecks: true
+      image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
+      tag: api-1.16.1
+    kasmManager:
+      name: kasm-manager
+      addHealthChecks: true
+      image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
+      tag: manager-1.16.1
+      replicas: null
+    kasmGuac:
+      name: kasm-guac
+      deploy: true
+      addHealthChecks: true
+      image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
+      tag: guac-1.16.1
+    rdpGateway:
+      name: rdp-gateway
+      deploy: true
+      addHealthChecks: true
+      image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
+      tag: rdp-gateway-1.16.1
+    rdpHttpsGateway:
+      name: rdp-https-gw
+      image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
+      tag: rdp-https-gateway-1.16.1
+    kasmShare:
+      name: kasm-share
+      deploy: true
+      addHealthChecks: true
+      image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
+      tag: share-1.16.1
+    kasmRedis:
+      name: kasm-redis
+      image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
+      tag: redis-1.16.1
