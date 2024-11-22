@@ -1,0 +1,28 @@
+apiVersion: bcc.bd-apaas.com/v1alpha1
+kind: IngressRoute
+metadata:
+  name: "{{ .Release.Name }}"
+  namespace: "{{ .Release.Namespace}}"
+spec:
+  entryPoints:
+    - websecure
+  tls: {}
+  routes:
+    - kind: Rule
+      match: Host(`{{ .Values.global.hostname }}`)
+      services:
+        - kind: Service
+          name: kasm-proxy
+          port: 8080
+    - kind: Rule
+      match: Host(`{{ .Values.global.hostname }}`) && PathPrefix(`/api/`)
+      services:
+        - kind: Service
+          name: kasm-api
+          port: 8080
+    - kind: Rule
+      match: Host(`{{ .Values.global.hostname }}`) && PathPrefix(`/api/share/`)
+      services:
+        - kind: Service
+          name: kasm-share
+          port: 8182

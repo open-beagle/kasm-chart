@@ -35,10 +35,11 @@ spec:
         {{- include "kasm.podSecurity" . | indent 6 }}
       {{- end }}
       initContainers:
-        {{- include "kasm.initContainer" (dict "serviceName" "kasm-api" "servicePort" "8080" "path" "/api/__healthcheck" "schema" "http") | nindent 8 }}
+        {{- $curlImage := printf "%s" (include "kasm.curl.repository" .) }}
+        {{- include "kasm.initContainer" (dict "serviceName" "kasm-api" "servicePort" "8080" "path" "/api/__healthcheck" "schema" "http" "serviceImage" $curlImage) | nindent 8 }}
         {{- if .Values.kasmApp.applyHardening }}
         - name: rdp-https-gateway-tmp-perms
-          image: busybox
+          image: {{ .Values.kasmApp.servicesToDeploy.busybox.image }}:{{ .Values.kasmApp.servicesToDeploy.busybox.tag }}
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh

@@ -162,6 +162,32 @@
         "servicesToDeploy": {
           "additionalProperties": false,
           "properties": {
+            "busybox": {
+              "additionalProperties": false,
+              "properties": {
+                "image": {
+                  "title": "image",
+                  "type": "string"
+                },
+                "tag": {
+                  "title": "tag",
+                  "type": "string"
+                }
+              }
+            },
+            "curl": {
+              "additionalProperties": false,
+              "properties": {
+                "image": {
+                  "title": "image",
+                  "type": "string"
+                },
+                "tag": {
+                  "title": "tag",
+                  "type": "string"
+                }
+              }
+            },
             "db": {
               "additionalProperties": false,
               "properties": {

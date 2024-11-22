@@ -3,8 +3,9 @@ global:
   kasmPasswords:
     adminPassword: "beagle!@#123"
     userPassword: "beagle!@#123"
+  hostname: kasmweb.wodcloud.local
 
-kasmApp:  
+kasmApp:
   servicesToDeploy:
     kasmProxy:
       name: kasm-proxy
@@ -25,7 +26,6 @@ kasmApp:
       addHealthChecks: true
       image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
       tag: manager-1.16.1
-      replicas: null
     kasmGuac:
       name: kasm-guac
       deploy: true
@@ -52,3 +52,9 @@ kasmApp:
       name: kasm-redis
       image: registry.cn-qingdao.aliyuncs.com/wod/kasmweb
       tag: redis-1.16.1
+    busybox:
+      image: registry.cn-qingdao.aliyuncs.com/wod/busybox
+      tag: "1"
+    curl:
+      image: registry.cn-qingdao.aliyuncs.com/wod/curl
+      tag: alpine

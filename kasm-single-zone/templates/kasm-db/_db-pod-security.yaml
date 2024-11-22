@@ -23,7 +23,7 @@ securityContext:
 {{- define "db.initContainer" }}
 initContainers:
   - name: db-data-perms
-    image: busybox
+    image: {{ .Values.kasmApp.servicesToDeploy.busybox.image }}:{{ .Values.kasmApp.servicesToDeploy.busybox.tag }}
     command:
       - /bin/sh
       - -ec

@@ -35,6 +35,13 @@ helm upgrade \
 helm uninstall \
   --namespace=beagle-kasm \
   kasm
+
+# 4. Template
+helm template \
+  --namespace=beagle-kasm \
+  kasm \
+  ./kasm-single-zone \
+  -f .beagle/values-amd64.yaml
 ```
 
 ## images
@@ -60,9 +67,9 @@ docker pull kasmweb/manager:1.16.1 && \
 docker tag kasmweb/manager:1.16.1 registry.cn-qingdao.aliyuncs.com/wod/kasmweb:manager-1.16.1 && \
 docker push registry.cn-qingdao.aliyuncs.com/wod/kasmweb:manager-1.16.1
 
-# kasmweb/guac
-docker pull kasmweb/guac:1.16.1 && \
-docker tag kasmweb/guac:1.16.1 registry.cn-qingdao.aliyuncs.com/wod/kasmweb:guac-1.16.1 && \
+# kasmweb/kasm-guac
+docker pull kasmweb/kasm-guac:1.16.1 && \
+docker tag kasmweb/kasm-guac:1.16.1 registry.cn-qingdao.aliyuncs.com/wod/kasmweb:guac-1.16.1 && \
 docker push registry.cn-qingdao.aliyuncs.com/wod/kasmweb:guac-1.16.1
 
 # kasmweb/rdp-gateway

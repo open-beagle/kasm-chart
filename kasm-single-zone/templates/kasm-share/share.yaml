@@ -36,7 +36,7 @@ spec:
       {{- end }}
       initContainers:
         - name: redis-is-ready
-          image: redis:5-alpine
+          image: "{{ .Values.kasmApp.servicesToDeploy.kasmRedis.image }}:{{ .Values.kasmApp.servicesToDeploy.kasmRedis.tag }}"
           imagePullPolicy: IfNotPresent
           env:
             - name: REDIS_PASSWORD
@@ -56,7 +56,8 @@ spec:
           {{- if .Values.kasmApp.applyHardening }}
             {{- include "kasm.containerSecurity" . | indent 10 }}
           {{- end }}
-        {{- include "kasm.initContainer" (dict "serviceName" "kasm-api" "servicePort" "8080" "path" "/api/__healthcheck" "schema" "http") | nindent 8 }}
+        {{- $curlImage := printf "%s" (include "kasm.curl.repository" .) }}
+        {{- include "kasm.initContainer" (dict "serviceName" "kasm-api" "servicePort" "8080" "path" "/api/__healthcheck" "schema" "http" "serviceImage" $curlImage) | nindent 8 }}
         {{- if .Values.kasmApp.applyHardening }}
           {{- include "kasm.containerSecurity" . | indent 10 }}
         {{- end }}

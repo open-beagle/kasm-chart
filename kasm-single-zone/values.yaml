@@ -288,6 +288,14 @@ kasmApp:
       ##     memory: 512Mi
       ##
       resources: {}
+    
+    busybox:
+      image: busybox
+      tag: "1.34"
+
+    curl:
+      image: alpine/curl
+      tag: "8.8.0"
 
 ## TLS Certificates to create as secrets
 ## If create is true and no certificates are provided in this configuration then

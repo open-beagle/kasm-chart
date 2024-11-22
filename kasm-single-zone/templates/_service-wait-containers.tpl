@@ -1,12 +1,12 @@
 {{/*
 Init container used to wait for upstream services before attempting to start the primary pod container
 Example:
-  {{ include "kasm.initContainer" (dict "serviceName" "kasm-service-name" "servicePort" "kasm-service-port" "path" "healthcheck-path" "schema" "http") }}
+  {{ include "kasm.initContainer" (dict "serviceName" "kasm-service-name" "servicePort" "kasm-service-port" "path" "healthcheck-path" "schema" "http" "serviceImage" "alpine/curl:8.8.0") }}
 */}}
 {{- define "kasm.initContainer" }}
   {{- if and (hasKey . "serviceName") (hasKey . "servicePort") ( hasKey . "path" ) (hasKey . "schema")}}
 - name: {{ .serviceName }}-is-ready
-  image: alpine/curl:8.8.0
+  image: {{ .serviceImage }}
   imagePullPolicy: IfNotPresent
   command:
   - /bin/sh
@@ -19,3 +19,6 @@ Example:
     {{- printf "ERROR: Invalid or non-existent key. Allowed values are %s" "serviceName, servicePort, path" | fail}}
   {{- end }}
 {{- end }}
+{{- define "kasm.curl.repository" -}}
+{{- .Values.kasmApp.servicesToDeploy.curl.image -}}:{{- .Values.kasmApp.servicesToDeploy.curl.tag -}}
+{{- end -}}
